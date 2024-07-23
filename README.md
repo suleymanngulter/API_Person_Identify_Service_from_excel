@@ -1,0 +1,1 @@
+Bu sistem büyük çaplı işletmelerin Büyük çaplı verilerle kişi doğrulamasını sağlayan bir API servisidir. excel dosyasına gerekli bilgileri girip excel dosyasını seçip programı çalıştırmanız yeterlidir
