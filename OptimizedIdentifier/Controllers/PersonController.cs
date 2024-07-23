@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using OptimizedIdentifier.Services;
 using System;
 using System.Threading.Tasks;
@@ -17,12 +18,16 @@ namespace OptimizedIdentifier.Controllers
         }
 
         [HttpPost("verify-from-excel")]
-        public async Task<IActionResult> VerifyFromExcel()
+        public async Task<IActionResult> VerifyFromExcel(IFormFile file)
         {
             try
             {
-                string filePath = @"C:\Users\example.xlsx"; 
-                var result = await _personVerificationService.VerifyFromExcelAsync(filePath);
+                if (file == null || file.Length == 0)
+                {
+                    return BadRequest("Dosya seçilmedi.");
+                }
+
+                var result = await _personVerificationService.VerifyFromExcelAsync(file);
                 return Content(result, "application/json");
             }
             catch (Exception ex)
